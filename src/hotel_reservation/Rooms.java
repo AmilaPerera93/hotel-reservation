@@ -15,7 +15,8 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import net.proteanit.sql.DbUtils;
- 
+//import org.apache.commons.dbutils.DbUtils;
+import java.sql.*;
 /**
  *
  * @author Amila
@@ -146,6 +147,11 @@ public class Rooms extends javax.swing.JFrame {
         btn_edit.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btn_edit.setForeground(new java.awt.Color(255, 255, 255));
         btn_edit.setText("Edit");
+        btn_edit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_editActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(153, 0, 51));
@@ -197,6 +203,11 @@ public class Rooms extends javax.swing.JFrame {
         btn_delete.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btn_delete.setForeground(new java.awt.Color(255, 255, 255));
         btn_delete.setText("Delete");
+        btn_delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_deleteActionPerformed(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(153, 0, 51));
@@ -333,6 +344,98 @@ public class Rooms extends javax.swing.JFrame {
     }
       
     }//GEN-LAST:event_btn_addActionPerformed
+     
+    
+    private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
+        int selectedRow = tbl_rooms.getSelectedRow();
+    if (selectedRow == -1) {
+        JOptionPane.showMessageDialog(this, "Please select a room to delete.");
+        return;
+    }
+    
+    String RNum = tbl_rooms.getValueAt(selectedRow, 0).toString(); // Assuming the first column is the room ID
+
+    String dbpath = "jdbc:mysql://localhost:3306/hoteldb";
+    Connection con = null;
+    PreparedStatement pst = null;
+
+    try {
+        con = DriverManager.getConnection(dbpath, "root", "");
+        String query = "DELETE FROM RoomTbl WHERE RNum = ?"; 
+        pst = con.prepareStatement(query);
+        pst.setString(1, RNum);
+
+        int row = pst.executeUpdate();
+        if (row > 0) {
+            JOptionPane.showMessageDialog(this, "Room Deleted!!");
+            showRooms(); // Refresh the table
+        } else {
+            JOptionPane.showMessageDialog(this, "Failed to delete the room.");
+        }
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(this, ex.getMessage());
+        ex.printStackTrace();
+    } finally {
+        try {
+            if (pst != null) pst.close();
+            if (con != null) con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    }//GEN-LAST:event_btn_deleteActionPerformed
+
+    private void btn_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editActionPerformed
+         int selectedRow = tbl_rooms.getSelectedRow();
+    if (selectedRow == -1) {
+        JOptionPane.showMessageDialog(this, "Please select a room to update.");
+        return;
+    }
+
+    String roomId = tbl_rooms.getValueAt(selectedRow, 0).toString(); 
+    String roomName = txt_Rname.getText();
+    String roomCategory = cmb_Cat.getSelectedItem().toString();
+    String roomStatus = cmb_status.getSelectedItem().toString();
+    String roomPrice = txt_price.getText();
+
+    if (roomName.isEmpty() || roomCategory.isEmpty() || roomStatus.isEmpty() || roomPrice.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Please fill all fields.");
+        return;
+    }
+
+    String dbpath = "jdbc:mysql://localhost:3306/hoteldb";
+    Connection con = null;
+    PreparedStatement pst = null;
+
+    try {
+        con = DriverManager.getConnection(dbpath, "root", "");
+        String query = "UPDATE RoomTbl SET Rname = ?, RType = ?, RStatus = ?, Price = ? WHERE RNum = ?";
+        pst = con.prepareStatement(query);
+        pst.setString(1, roomName);
+        pst.setString(2, roomCategory);
+        pst.setString(3, roomStatus);
+        pst.setInt(4, Integer.parseInt(roomPrice));
+        pst.setString(5, roomId);
+
+        int row = pst.executeUpdate();
+        if (row > 0) {
+            JOptionPane.showMessageDialog(this, "Room Updated!!");
+            showRooms(); // Refresh the table
+        } else {
+            JOptionPane.showMessageDialog(this, "Failed to update the room.");
+        }
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(this, ex.getMessage());
+        ex.printStackTrace();
+    } finally {
+        try {
+            if (pst != null) pst.close();
+            if (con != null) con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    }//GEN-LAST:event_btn_editActionPerformed
 
     /**
      * @param args the command line arguments
