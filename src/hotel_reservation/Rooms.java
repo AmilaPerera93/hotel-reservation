@@ -14,7 +14,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import net.proteanit.sql.DbUtils;
+ 
 /**
  *
  * @author Amila
@@ -27,6 +28,7 @@ public class Rooms extends javax.swing.JFrame {
     
     public Rooms() {
         initComponents();
+        showRooms();
     }
 
     /**
@@ -282,7 +284,20 @@ public class Rooms extends javax.swing.JFrame {
        new Login().setVisible(true);
        this.dispose();
     }//GEN-LAST:event_btn_logoutMouseClicked
-
+    private void showRooms()
+    {
+        try {
+            String dbpath = "jdbc:mysql://localhost:3306/hoteldb";
+            Connection con = null;
+            
+            con = DriverManager.getConnection(dbpath, "root", "");
+            st=con.createStatement();
+            Rs=st.executeQuery("select * from RoomTbl");
+            tbl_rooms.setModel(DbUtils.resultSetToTableModel(Rs));
+            
+        } catch (Exception e) {
+        }
+    }
     private void btn_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addActionPerformed
       if (txt_Rname.getText().isEmpty() || cmb_Cat.getSelectedIndex() == -1 || cmb_status.getSelectedIndex() == -1 || txt_price.getText().isEmpty()) {
         JOptionPane.showMessageDialog(this, "Missing Data!!");
@@ -302,6 +317,7 @@ public class Rooms extends javax.swing.JFrame {
 
             int row = pst.executeUpdate();
             JOptionPane.showMessageDialog(this, "Room Added!!");
+            showRooms();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
             ex.printStackTrace(); // Print stack trace to debug the SQL exception
@@ -309,6 +325,7 @@ public class Rooms extends javax.swing.JFrame {
             try {
                 if (pst != null) pst.close();
                 if (con != null) con.close();
+                
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(this, ex.getMessage());
             }
