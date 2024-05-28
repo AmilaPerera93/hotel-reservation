@@ -4,15 +4,27 @@
  */
 package hotel_reservation;
 
+//import com.sun.jdi.connect.spi.Connection;
+import java.sql.Statement;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Amila
  */
 public class Rooms extends javax.swing.JFrame {
-
-    /**
-     * Creates new form Dashboard
-     */
+    Connection Con = null;
+    PreparedStatement Pst = null;
+    ResultSet Rs = null;
+    Statement st = null;
+    
     public Rooms() {
         initComponents();
     }
@@ -173,6 +185,11 @@ public class Rooms extends javax.swing.JFrame {
         btn_add.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btn_add.setForeground(new java.awt.Color(255, 255, 255));
         btn_add.setText("Add");
+        btn_add.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_addActionPerformed(evt);
+            }
+        });
 
         btn_delete.setBackground(new java.awt.Color(51, 51, 255));
         btn_delete.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -256,11 +273,49 @@ public class Rooms extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    
+        
+        
+        
     private void btn_logoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_logoutMouseClicked
        new Login().setVisible(true);
        this.dispose();
     }//GEN-LAST:event_btn_logoutMouseClicked
+
+    private void btn_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addActionPerformed
+      if (txt_Rname.getText().isEmpty() || cmb_Cat.getSelectedIndex() == -1 || cmb_status.getSelectedIndex() == -1 || txt_price.getText().isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Missing Data!!");
+    } else {
+        String dbpath = "jdbc:mysql://localhost:3306/hoteldb";
+        Connection con = null;
+        PreparedStatement pst = null;
+
+        try {
+            con = DriverManager.getConnection(dbpath, "root", "");
+            String query = "INSERT INTO roomtbl (Rname, RType, RStatus, Price) VALUES (?, ?, ?, ?)";
+            pst = con.prepareStatement(query);
+            pst.setString(1, txt_Rname.getText());
+            pst.setString(2, cmb_Cat.getSelectedItem().toString());
+            pst.setString(3, cmb_status.getSelectedItem().toString());
+            pst.setInt(4, Integer.parseInt(txt_price.getText()));
+
+            int row = pst.executeUpdate();
+            JOptionPane.showMessageDialog(this, "Room Added!!");
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+            ex.printStackTrace(); // Print stack trace to debug the SQL exception
+        } finally {
+            try {
+                if (pst != null) pst.close();
+                if (con != null) con.close();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage());
+            }
+        }
+    }
+      
+    }//GEN-LAST:event_btn_addActionPerformed
 
     /**
      * @param args the command line arguments
