@@ -41,10 +41,10 @@ public class Customers extends javax.swing.JFrame {
         jLabel36 = new javax.swing.JLabel();
         jLabel37 = new javax.swing.JLabel();
         jPanel10 = new javax.swing.JPanel();
-        jLabel35 = new javax.swing.JLabel();
+        btn_rooms = new javax.swing.JLabel();
         jLabel38 = new javax.swing.JLabel();
         btn_logout7 = new javax.swing.JLabel();
-        jLabel39 = new javax.swing.JLabel();
+        btn_reserve = new javax.swing.JLabel();
         jLabel40 = new javax.swing.JLabel();
         btn_delete = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
@@ -76,13 +76,23 @@ public class Customers extends javax.swing.JFrame {
 
         jPanel10.setBackground(new java.awt.Color(0, 51, 51));
 
-        jLabel35.setFont(new java.awt.Font("Arial", 3, 20)); // NOI18N
-        jLabel35.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel35.setText("Rooms");
+        btn_rooms.setFont(new java.awt.Font("Arial", 3, 20)); // NOI18N
+        btn_rooms.setForeground(new java.awt.Color(255, 255, 255));
+        btn_rooms.setText("Rooms");
+        btn_rooms.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_roomsMouseClicked(evt);
+            }
+        });
 
         jLabel38.setFont(new java.awt.Font("Arial", 3, 20)); // NOI18N
         jLabel38.setForeground(new java.awt.Color(255, 255, 255));
         jLabel38.setText("Customer");
+        jLabel38.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel38MouseClicked(evt);
+            }
+        });
 
         btn_logout7.setFont(new java.awt.Font("Arial", 3, 20)); // NOI18N
         btn_logout7.setForeground(new java.awt.Color(255, 255, 255));
@@ -93,9 +103,14 @@ public class Customers extends javax.swing.JFrame {
             }
         });
 
-        jLabel39.setFont(new java.awt.Font("Arial", 3, 20)); // NOI18N
-        jLabel39.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel39.setText("Reservations");
+        btn_reserve.setFont(new java.awt.Font("Arial", 3, 20)); // NOI18N
+        btn_reserve.setForeground(new java.awt.Color(255, 255, 255));
+        btn_reserve.setText("Reservations");
+        btn_reserve.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_reserveMouseClicked(evt);
+            }
+        });
 
         jLabel40.setFont(new java.awt.Font("Arial", 3, 20)); // NOI18N
         jLabel40.setForeground(new java.awt.Color(255, 255, 255));
@@ -111,8 +126,8 @@ public class Customers extends javax.swing.JFrame {
                     .addComponent(btn_logout7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel10Layout.createSequentialGroup()
                         .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel35, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel39, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_rooms, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_reserve, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel38, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 13, Short.MAX_VALUE))
                     .addComponent(jLabel40, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -122,11 +137,11 @@ public class Customers extends javax.swing.JFrame {
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addGap(147, 147, 147)
-                .addComponent(jLabel35, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btn_rooms, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addComponent(jLabel38, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
-                .addComponent(jLabel39, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btn_reserve, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addComponent(jLabel40, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -372,6 +387,21 @@ public class Customers extends javax.swing.JFrame {
     }
     }//GEN-LAST:event_btn_addActionPerformed
 
+    private void jLabel38MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel38MouseClicked
+        new Customers().setVisible(true);
+        this.dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel38MouseClicked
+
+    private void btn_roomsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_roomsMouseClicked
+        new Rooms().setVisible(true);
+       this.dispose();
+    }//GEN-LAST:event_btn_roomsMouseClicked
+
+    private void btn_reserveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_reserveMouseClicked
+       new Reservations().setVisible(true);
+       this.dispose();
+    }//GEN-LAST:event_btn_reserveMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -411,66 +441,22 @@ public class Customers extends javax.swing.JFrame {
     private javax.swing.JButton btn_add;
     private javax.swing.JButton btn_delete;
     private javax.swing.JButton btn_edit;
-    private javax.swing.JLabel btn_logout;
-    private javax.swing.JLabel btn_logout1;
-    private javax.swing.JLabel btn_logout2;
-    private javax.swing.JLabel btn_logout3;
-    private javax.swing.JLabel btn_logout4;
-    private javax.swing.JLabel btn_logout5;
-    private javax.swing.JLabel btn_logout6;
     private javax.swing.JLabel btn_logout7;
+    private javax.swing.JLabel btn_reserve;
+    private javax.swing.JLabel btn_rooms;
     private javax.swing.JComboBox<String> cmb_gender;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel28;
-    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel30;
-    private javax.swing.JLabel jLabel31;
-    private javax.swing.JLabel jLabel32;
-    private javax.swing.JLabel jLabel33;
-    private javax.swing.JLabel jLabel34;
-    private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
-    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tbl_customers;
     private javax.swing.JTextField txt_city;

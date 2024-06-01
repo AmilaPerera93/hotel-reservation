@@ -67,6 +67,11 @@ public class Rooms extends javax.swing.JFrame {
         setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(0, 51, 51));
+        jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel1MouseClicked(evt);
+            }
+        });
 
         btn_rooms.setFont(new java.awt.Font("Arial", 3, 20)); // NOI18N
         btn_rooms.setForeground(new java.awt.Color(255, 255, 255));
@@ -75,6 +80,11 @@ public class Rooms extends javax.swing.JFrame {
         btn_customer.setFont(new java.awt.Font("Arial", 3, 20)); // NOI18N
         btn_customer.setForeground(new java.awt.Color(255, 255, 255));
         btn_customer.setText("Customer");
+        btn_customer.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_customerMouseClicked(evt);
+            }
+        });
 
         btn_logout.setFont(new java.awt.Font("Arial", 3, 20)); // NOI18N
         btn_logout.setForeground(new java.awt.Color(255, 255, 255));
@@ -88,6 +98,11 @@ public class Rooms extends javax.swing.JFrame {
         btn_reservation.setFont(new java.awt.Font("Arial", 3, 20)); // NOI18N
         btn_reservation.setForeground(new java.awt.Color(255, 255, 255));
         btn_reservation.setText("Reservations");
+        btn_reservation.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_reservationMouseClicked(evt);
+            }
+        });
 
         jLabel11.setFont(new java.awt.Font("Arial", 3, 20)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
@@ -121,7 +136,7 @@ public class Rooms extends javax.swing.JFrame {
                 .addComponent(btn_reservation, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 181, Short.MAX_VALUE)
                 .addComponent(btn_logout, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25))
         );
@@ -436,6 +451,22 @@ public class Rooms extends javax.swing.JFrame {
         }
     }
     }//GEN-LAST:event_btn_editActionPerformed
+
+    private void jPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel1MouseClicked
+
+    private void btn_customerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_customerMouseClicked
+                                           
+       new Customers().setVisible(true);
+       this.dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_customerMouseClicked
+
+    private void btn_reservationMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_reservationMouseClicked
+                                             
+       new Reservations().setVisible(true);
+       this.dispose();
+    }//GEN-LAST:event_btn_reservationMouseClicked
 
     /**
      * @param args the command line arguments
