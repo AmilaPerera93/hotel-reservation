@@ -393,7 +393,7 @@ public class Customers extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel38MouseClicked
 
     private void btn_roomsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_roomsMouseClicked
-        new Rooms().setVisible(true);
+       new Rooms().setVisible(true);
        this.dispose();
     }//GEN-LAST:event_btn_roomsMouseClicked
 
